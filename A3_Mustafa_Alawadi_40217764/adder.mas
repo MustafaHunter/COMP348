@@ -1,0 +1,89 @@
+Begin, Clear
+
+Load I
+
+Output
+
+Input      /Takes user input
+
+Store X    /Stores user input to X
+
+Load X
+
+Output
+
+Load J
+
+Output
+
+Input      /Takes user input
+
+Store Y    /Stores user input to Y
+
+Load Y
+
+Output
+
+Load X     /Load X to AC
+
+Add Y      /Add Y to X
+
+Subt F
+
+Store Z    /Store addition to Z
+
+Load K
+
+Output
+
+Load Z
+
+Output     /Print Z
+
+Input / Go again?
+
+Skipcond 800 /Go again
+
+Jump Begin
+
+Load B /Output BYE
+
+Output
+
+Load M
+
+Output
+
+Load E
+
+Output
+
+ 
+
+ 
+
+HALT       /End program
+
+/Variable declaration
+
+Z, DEC 0
+
+X, DEC 0
+
+Y, DEC 0
+
+I, DEC 62  />
+
+J, DEC 43  /+
+
+K, DEC 61  /=
+
+L, DEC 21  /!
+
+B, DEC 66  /B
+
+M, DEC 89  /Y
+
+E, DEC 69  /E
+
+F, DEC 48 /number to subtract from result
