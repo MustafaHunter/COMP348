@@ -1,0 +1,7 @@
+(defun compress (lst)
+   (nreverse(if (null lst)
+      '()
+    (let ((compressed (list (first lst))))
+      (dolist (elem (rest lst) compressed)
+        (if (not (equal (first compressed) elem))
+            (push elem compressed)))))))

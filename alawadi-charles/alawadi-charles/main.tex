@@ -1,0 +1,452 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{oz}
+\title{Assignment 1 \\[1cm] \Large Professor: Dr. Constantinos Constantinides \\[0.5cm] Course: Soen 331}
+\author{Alawadi Mustafa and Randall-M.Charles }
+
+\date{February 27 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{}
+Since we have $\text{blue} \rightarrow \text{prime}$\newline\newline
+The equivalent is the contrapositive  $\neg \text{prime} \rightarrow \neg \text{blue}$\newline\newline
+Given the numbers 9 and 11, and the colors blue and yellow, we need to flip the cards that will help us verify the contrapositive.
+\newline \newline
+1. \textbf{Blue Card}: Since the proposition states that blue cards must have prime numbers on the other side, we need to verify if the blue card has a prime number on its back. If it doesn't, it would confirm the contrapositive.
+\newline \newline
+2. \textbf{Number 9 Card}: Since we know that 9 is not a prime number, flipping this card will help us determine if a non-prime number corresponds to the color blue, which is necessary to confirm the contrapositive.\newline\newline
+Therefore, the cards to turn over are the blue card and the number 9 card.
+
+
+\section{}
+\subsection{}
+1) \newline
+
+The predicate logic formulas are: \newline\newline
+$\text{Planet} = \forall x,y : \text{Object}(x) \land \text{Mass}(x,y) \land \text{Orbits}(x,sun) \rightarrow \text{Planet}(x)$
+\newline\newline
+$\text{is\_satelitte\_of} = \forall x,y : \text{Object}(x) \land \text{Planet}(y) \land \text{Orbits}(x,y) \rightarrow \text{is\_satellite\_of}(x,y)$ \newline\newline
+2)\newline\newline
+\begin{verbatim}
+:- consult('solar.pl').
+
+planet(X) :- mass(X, Y), Y > 0.33, orbits(X, sun).
+
+is_satellite_of(X, Y) :- orbits(X, Y), planet(Y).
+
+
+?- planet(P).       %% non-ground query
+P = venus ;
+P = earth ;
+P = mars ;
+P = jupiter ;
+P = saturn ;
+P = uranus ;
+P = neptune ;
+false.
+
+?- planet(sun).     %% ground query
+false.
+
+?- planet(mercury). %% ground query
+false.
+\end{verbatim}
+3)
+\begin{verbatim}
+obtain_all_satellites(X, L) :- findall(Y, is_satellite_of(Y, X), L).
+
+?- obtain_all_satellites(earth, Satellite).       %% non-ground query
+Satellite = [moon] ;
+false.
+\end{verbatim}
+\subsection{}
+1) \newline\newline
+$\exists x (\text{number}(x) \land \neg \text{composite}(x))$  \hspace{1cm}  Type \hspace{1mm} O
+\newline\newline
+2) \newline\newline
+$\forall x (\text{number}(x) \rightarrow \text{composite}(x))$ \hspace{1cm}  Type \hspace{1mm} A
+\newline\newline
+3) \newline\newline
+$\exists x (\text{number}(x) \land \text{composite}(x))$  \hspace{1cm}  Type \hspace{1mm} I
+\newline\newline
+4) \newline\newline
+$\forall x (\text{number}(x) \rightarrow \neg \text{composite}(x))$ \hspace{0.7cm} Type \hspace{1mm} E
+
+\subsection{}
+1) \newline
+
+The negation is : $\exists s : S \mid s \notin P$
+We know that the proposition O is in the form: $\exists x [\neg p(x)]$. Therefore, the negation of A is logically equivalent to the O proposition.
+\newline \newline
+2)\newline\newline
+The E proposition is in the form $\forall x [\neg p(x)]$ or in this case $\forall s : S\mid s\notin P$. If we take the negation we get $\exists s : S \mid s \in P$ and since the proposition I is in the form $\exists s : S \mid s \in P$ then E and I are logically equivalent. 
+
+
+\newpage
+\section{}
+\subsection{}
+1)\newline
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.70\textwidth]{visualizations.drawio.png}
+    \caption{These are the temporal logic visualizations.}
+    \label{fig:temporal1}
+\end{figure}\newline
+2)\newline\newline
+The first visualization ends when $\pi$ releases $\omega$. The next one loops, since $\rho$ and $\tau$ keep calling themselves at intervals of 2 time periods. The third and fifth visualizations terminate in the same manner as the first. The fourth visualizations is infinite in the context where $\tau$ never releases $\rho$ and $\pi$ never releases $\omega$. The last one contains an infinite loop that could terminate if $\rho$ became true.
+\subsection{}
+1)\newline\newline
+The formal form is as follows: \[\diamond(\neg\phi\land\neg\psi)\rightarrow\bigcirc^2(\tau\text{R}\chi)\]
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.50\textwidth]{visualizations2.drawio.png}
+    \caption{These are the temporal logic visualizations.}
+    \label{fig:temporal2}
+\end{figure}\newline
+2)\newline\newline
+If either $\alpha$ or $\beta$ is false, then starting from time = i+1, $\gamma$ will eventually be true up and until some future moment when $\delta$ becomes true.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.50\textwidth]{visualizations3.drawio.png}
+    \caption{These are the temporal logic visualizations.}
+    \label{fig:temporal3}
+\end{figure}\newline
+3)\newline\newline
+If at time = i+1 $\tau$ becomes true and $\chi$ eventually becomes true, then at time = i+2, $\phi$ will be true unless $\psi$ becomes true.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{visualizations4.drawio.png}
+    \caption{These are the temporal logic visualizations.}
+    \label{fig:temporal4}
+\end{figure}\newline
+\section{}
+1)\newline\newline
+In plain English, the P Languages is the set of different programming languages that are used in the domain of software development. It represents the powerset of the set Languages which means it includes all possible subsets that can be made from the set of Languages. The last element is a set itself which contains three languages.Therefore, the set contain both languages and sets of languages. 
+\newline\newline
+2)\newline\newline
+a)\newline\newline The expression is a variable declaration, in which the LHS represents the variable and the RHS represents the type. The expression signifies that there is a relationship between "Favorites" and the set P Languages. Thus "Favorites" can have any subset of the set P Languages since it is the powerset of the set Languages. \newline\newline
+b)\newline\newline Favorites : P Languages is interpreted as the variable Favorite can assume any value supported by the powerset of Languages. Thus Favorites can include any combination of programming languages listed in P languages. \newline\newline
+c)\newline\newline The legitimate values for the variable "Favorites" could be Lua, Groovy, and C since in order for them to be legitimate, they must be a subset of P Languages. Additionally, the set itself and the empty set could also be legitimate since it is a subset of the set of languages.
+\newline\newline
+3)\newline\newline
+a)\newline\newline
+The expression Favorites = P signifies that the variable "Favorites" is assigned the entire powerset of the set Languages. \newline\newline
+b)\newline\newline
+It isn't semantically equivalent to Favorites:P Languages since this expression Favorites = P assigns the whole powerset to the variable whereas this expression Favorites:P declares the variable to have the type powerset. 
+\newline\newline
+4)\newline\newline
+No, since this expression is not an element of P Languages. P Languages contain the subsets of Languages but not distinct elements which are sets to begin with. 
+\newline\newline
+5)\newline\newline
+No, since any subset that belongs to a power set has to be a set of sets. Therefore this structure is rather a set of atomic elements.
+\newline\newline
+6)\newline\newline
+a)\newline\newline
+This is an non-atomic variable. The Languages declare the variable of the type Languages and that is the set of programming languages.\newline\newline
+b)\newline\newline
+This is an non-atomic variable. P Languages declare the variable of the type of P Languages that is the powerset of Languages.
+\newline\newline
+7)\newline\newline
+Library is a set that contains elements of programming languages and it can have any elements that are supported by the P Languages. Therefore, it is of type P Languages.  
+\newline\newline
+8)\newline\newline
+Yes it is correct because this empty set that contains one element, which is the empty set, is a subset of any set and thus it is included as an element. 
+\newline\newline
+9)\newline\newline
+\begin{verbatim}
+(defun is-memberp (element set)
+  (member element set))
+\end{verbatim}
+\begin{verbatim}
+(defun equal-setsp (set1 set2)
+  (and (subsetp set1 set2) (subsetp set2 set1)))
+\end{verbatim}
+\begin{verbatim}
+; Define some sets
+(defvar set1 '(1 2 3 4 5))
+(defvar set2 '(3 4 5 6 7))
+(defvar set3 '(1 2 3 4 5))
+(defvar set4 '(3 4 5 2 1))
+
+; Test is-memberp
+(is-memberp 3 set1) ; Returns T
+(is-memberp 6 set1) ; Returns NIL
+
+; Test equal-setsp
+(equal-setsp set1 set2) ; Returns NIL
+(equal-setsp set1 set3) ; Returns T
+(equal-setsp set2 set4) ; Returns NIL
+\end{verbatim}
+\section{}
+1)\newline\newline
+\begin{class}{Qeueue}
+\also
+\sres (Enqueue,Dequeue) \\
+\begin{state}
+\Sigma_1 : \mathbb{P}\ STACK\_TYPE\\
+count1: \nat \\
+count2: \nat \\
+element: \mathbb{T}
+\ST
+count1, count2 \geq 0
+\end{state} \\
+\begin{init}
+Stack = \emptyset \\
+Stack2 = \emptyset \\
+count1 = 0 \\
+count2 = 0
+\end{init} \\
+\begin{sidebyside}
+\begin{schema}{Enqueue1OK}
+\Delta(\Sigma_1,count1,count2,element) \\
+\Sigma_1?: STACK\_TYPE
+\ST
+count2 == 0 \\
+\Sigma_1\ '\ = \Sigma_1?\ \cup \lseq element? \rseq \\
+count1' = count1 + 1
+\end{schema}
+\nextside
+\begin{schema}{Dequeue1OK}
+\Delta(\Sigma_1,\Sigma_2,count1,count2) \\
+\Sigma_1? : STACK\_TYPE
+\ST
+count1 == 0\ \&\&\ count2 \geq 1 \\
+\Sigma_2\ ' = \Sigma_1? \setminus \lseq x \rseq \\
+count2' = count2 - 1 \\
+topelement\ != x
+\end{schema}
+\end{sidebyside} \\
+\begin{sidebyside}
+\begin{schema}{Enqueue2OK}
+\Delta(\Sigma_1,\Sigma_2,count1,count2,\\element) \\
+\Sigma_1?: STACK\_TYPE \\
+element? : \mathbb{T}
+\ST
+\Sigma_1\ '\ = \Sigma_1\ \cup\ \Sigma_1? \\
+\Sigma_1\ '' = \Sigma_1\ \cup \lseq element? \rseq \\
+count1 = count2 + 1 \\
+count2 = 0
+\end{schema}
+\nextside
+\begin{schema}{Dequeue2OK}
+\Delta(\Sigma_1,\Sigma_2,count1,count2) \\
+\Sigma_1? : STACK\_TYPE
+\ST
+count1 \geq 1\ \&\&\ count2 == 0 \\
+\Sigma_2\ ' = \Sigma_1? \\
+\Sigma_2\ '' = \Sigma_2\ '\ \setminus \lseq x \rseq \\
+count2' = count1 - 1 \\
+count1 = 0 \\
+topelement\ != x
+\end{schema}
+\end{sidebyside} \\
+Enqueue\ \hat{=}\ (Enqueue1OK || Enqueue2OK) \\
+Dequeue\ \hat{=}\ (Dequeue1OK || Dequeue2OK)
+\end{class}
+2)\newline\newline
+\begin{verbatim}
+(setf stack1 '())
+(setf stack2 '())
+
+(defun length (lst)
+(if (null lst)
+0
+(+ 1 (length (cdr lst)))))
+
+(defun reverse (lst)
+    (cond ((null lst) '())
+        (t (append (reverse (cdr lst)) (list (car lst))))))
+
+(defun enqueue ( queue element )
+(let ((count1 length(stack1)) (count2 length(stack2))
+) (if (zerop count2)
+    (append '(element) queue)
+    (append '(element) queue)
+    )
+
+;;  (if (and (not (zerop count1))       --->For dequeue
+;;        (zerop count2))
+;;    1
+;;    0)  
+
+)
+)
+\end{verbatim}
+3)\newline\newline
+\begin{verbatim}
+head([H|_], H).
+
+tail([_|T], T).
+
+cons([], List, List).
+cons(List, [], List).
+cons(ATOM, List2, [ATOM|List2]).
+cons([H|T], List2, [H|T3]) :- cons(T, List2, T3).
+
+
+?- head([a, b, c, d], H).
+H = a .
+
+?- head([x], H).
+H = x .
+
+?- head([], H).
+false.
+
+?- tail([a, b, c, d], T).
+T = [b, c, d] .
+
+?- tail([x], T).
+T = [] .
+
+?- tail([], T).
+false.
+
+?- cons(a, [b, c], NewList).
+NewList = [a, b, c] .
+
+?- cons(a, [], NewList).
+NewList = a ;
+NewList = [a] .
+
+?- cons([], [], NewList).
+NewList = [] ;
+NewList = [] ;
+NewList = [[]] .
+\end{verbatim}
+\section{}
+\subsection{}
+1)
+For R to be a partial order, it needs to be reflexive, anti-symmetric, transitive. 
+\newline \newline
+Reflexivity: 
+All the elements x in the domain, xRx. The condition satisfies since for any x in the Java API, it reflects itself. 
+\newline \newline
+Anti-symmetry: 
+For xRy and yRx, then we have x=y. This holds true since in Java all types are unique and can't be similar to one another simultaneously. 
+\newline \newline
+Transitivity: 
+If we have xRy and yRz, then we have xRz. This holds true since Java allows for inheritance to be done in a single way, so if x is of type y and y is of type z, then x is of type z automatically. 
+\newline \newline
+We conclude that the relation R is reflexive, anti-symmetric and transitive, therefore is a partial order. 
+\newline \newline
+2) 
+To prove that (V1,R) is a poset, it needs to be reflexive, anti-symmetric, transitive. 
+\newline \newline
+Reflexivity: 
+All the values in V1 should be in R. This holds true since all the values are found in both vertices. 
+\newline \newline
+Anti-symmetry: 
+ If we have the values v and u, and they are related to each other then there is a direct relation between them,however, it is not the case here because of the directed edges.Thus there is anti-symmetry. 
+\newline \newline
+Transitivity: 
+If we consider vRu and uRx, there is a direct link from v to u and from u to x. Thus, there is a direct link from v to x and for that reason the transitivity holds. 
+\newline \newline
+Therefore we have proved (V1,R) is a poset. 
+\newline\newline
+3) 
+To create the Hasse Diagram, we will have to identify relationship between the vertices. For each edge (x,y) in E, we have xRy. 
+\newline \newline
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{hasse(2).JPG}
+    \caption{This is the Hasse Diagram.}
+    \label{fig:example}
+\end{figure}\newline
+\newline\newline
+Maximal element is Dictionary.
+\newline
+Minimal element is LinkedHashMap.
+\subsection{}
+1)
+To prove that $ \subseteq $ is a partial order, the binary relation must be reflexive, anti-symmetry, and transitive. 
+\newline \newline
+Reflexivity: 
+Any set set x is a subset of itself since all elements in x are also elements in x. Thus, $x \subseteq x$.
+\newline \newline
+Anti-symmetry: 
+In case that x is a subset of y, and y is a subset of x, then x=y. Since $x \subseteq y$ and $y \subseteq x$, then every element in x is in y and vise-versa which implies that x=y as they have exactly the same elements. 
+\newline \newline
+Transitivity: 
+In case x is a subset of y and y is a subset of z, then x is a subset of z. Thus, if $x \subseteq y$ and $y \subseteq z$, then $x \subseteq z$ and any value inside of x is inside of y and also inside of z. 
+\newline \newline
+Because the relation satisfies all three properties, we can say that the subset relation $ \subseteq $  is a partial order over the domain of sets.
+\newline \newline
+2)
+To prove that (P(V2),$ \subseteq $) is a poset, it must be reflexive, anti-symmetry, and transitive. 
+\newline \newline
+Reflexivity: 
+If we consider the set A in P(V2), then $A \subseteq A$ because a set is a subset of itself. So there is reflexivity.
+\newline \newline
+Anti-symmetry: 
+If we consider A and B \( \in P(V2) \) as in $A \subseteq B$ and $B \subseteq A$, then any element in either set must also belong to the other one, so A=B.
+\newline \newline
+Transitivity: 
+If we let A, B, and C \( \in P(V2) \) then we have $A \subseteq B \subseteq C$, which also means that $A \subseteq C$ and any element inside of A is inside of B and also inside of C. 
+\newline \newline
+Because all three properties hold, then (P(V2) ,$ \subseteq $)  is a poset.
+\newline\newline
+3) 
+To create a Hasse Diagram, we need to list all the elements of P(V2), thus the power set of V2. 
+\newline\newline
+Power set P(V2) is: \[
+\{\emptyset, \{a\}, \{b\}, \{c\}, \{a, b\}, \{a, c\}, \{b, c\}, \{a, b, c\}\}\]
+\newline \newline
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{hasse(1).JPG}
+    \caption{This is the Hasse Diagram.}
+    \label{fig:example}
+\end{figure}\newline
+\newline\newline
+The top element would be the maximal elements, thus
+Maximal elements: \[\{a,\,b,\,c\}\]\newline
+The bottom elements would be the minimum elements, so 
+Minimal element: \[\emptyset\]
+\subsection{}
+Map is a function since all elements in the domain map to exactly one element in the co-domain and it is perfectly fine to have two elements from the domain pointing to one element from the co-domain. \newline
+Map is a partial function since not all the elements of the co-domain are being mapped to.
+\newline
+Map is  an injective function because each element of the domain map to one distinct element of the co-domain.It is not surjective since not each element of the co-domain is mapped to by at least one element of the domain. Thus the function is not bijective as bijection requires the function to be both injective and surjective.\newline
+The function is not order-preserving since the mapping does not involve sets that are ordered and the elements in the domain are not preserved by their images in the co-domain.
+The function is order-reflecting if the predecessor relationship between the elements in the co-domain is reflected by the pre-images in the domain. In this example, the order reflecting does not apply since the sets are unordered collections. In order for a function to be order-embedding, it needs to be both order-preserving and order-reflecting, and since we said that the function is not order-reflecting, then it is not order-embedding. In order for a function to be isomorphic, it needs to be both order-embedding and surjective, therefore since this condition does not apply, then it is not isomorphic. 
+\newline\newline
+
+\section{}
+1)\newline\newline
+\begin{verbatim}
+(defun compress (lst)
+  (if (null lst)
+      '()
+    (let ((compressed (list (first lst))))
+      (dolist (elem (rest lst) compressed)
+        (if (not (equal (first compressed) elem))
+            (push elem compressed))))))
+
+\end{verbatim}
+2)\newline\newline
+\begin{verbatim}
+(defun f (lst)
+  (cond ((null lst) '())
+        ((null (rest lst)) lst)
+        ((equal (first lst) (second lst)) (f (rest lst)))
+        (t (cons (first lst) (f (rest lst)))))) 
+\end{verbatim}
+3)\newline\newline
+We begin with the input list which is $\langle a, a, b, b, c, a \rangle$ . Then we compress the function by adding "a" to the list. Because "a" is the same as the term before it, it is ignored, and thus "b" is added to the list that is compressed. So far we have $\langle a, b, c \rangle$. Then "a" is added to the list and finally we get the final compressed list which is $\langle a, b, c, a \rangle$.
+\newline\newline
+4)\newline\newline
+\begin{verbatim}
+(defun compress (lst)
+   (nreverse(if (null lst)
+      '()
+    (let ((compressed (list (first lst))))
+      (dolist (elem (rest lst) compressed)
+        (if (not (equal (first compressed) elem))
+            (push elem compressed)))))))
+\end{verbatim}
+\end{document}
